@@ -8,11 +8,12 @@ url = "http://www.assembly.go.kr/assm/memact/congressman/memCond/memCondListAjax
 resp = requests.get(url)
 resp.encoding = 'utf8'
 html = resp.text
+html = re.sub(r'\s{1,2}[0-9a-f]{3,4}\s{1,2}', '', html)
 
 soup = BeautifulSoup(html, "lxml")
 
-f = open(str(time.time())+".txt", 'wt', encoding='utf-8')
-f.write(html)
+# f = open(str(time.time())+".txt", 'wt', encoding='utf-8')
+f = open(str(time.time())+".txt", 'wb').write(resp.content)
 
 for member_tag in soup.select('.memberna_list dl dt a'):
     name = member_tag.text
