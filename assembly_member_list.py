@@ -9,7 +9,7 @@ resp = requests.get(url)
 resp.encoding = 'utf8'
 html = resp.text
 
-soup = BeautifulSoup(html, "html.parser")
+soup = BeautifulSoup(html, "lxml")
 
 f = open(str(time.time())+".txt", 'wt', encoding='utf-8')
 f.write(html)
